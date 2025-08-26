@@ -17,15 +17,14 @@ This repository contains the implementation of my final year project on **AI-ass
 ---
 
 project-root/
-├── Model Training Code/
-│   ├── CBIS-DDSM_Mammogram_Preprocessing.ipynb
-│   └── Breast Cancer Detection Model + Grad-CAM.ipynb
-├── flask_app/
-│   ├── templates/
-│   ├── static/
-│   └── app.py
-├── requirements.txt
-└── README.md
+Model Training Code/
+  Breast Cancer Detection Model + Grad-CAM.ipynb
+flask_app/
+  templates/
+  static/
+  app.py
+  requirements.txt
+README.md
 
 ## To Run Flask App 
 pip install -r requirements.txt
