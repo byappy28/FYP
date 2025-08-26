@@ -16,20 +16,25 @@ This repository contains the implementation of my final year project on **AI-ass
 
 ---
 
-##  Repository Structure
 project-root/
-│──Model Training Code/ #CBIS-DDSM_Mammogram_Preprocessing.ipynb
-│──Model Training Code/ #Breast Cancer Detection Model + Grad-CAM.ipynb
-│── flask_app/ # Flask web application (templates, static, app.py)
-│── requirements.txt # Python dependencies
-│── README.md # This file
+├── Model Training Code/
+│   ├── CBIS-DDSM_Mammogram_Preprocessing.ipynb
+│   └── Breast Cancer Detection Model + Grad-CAM.ipynb
+├── flask_app/
+│   ├── templates/
+│   ├── static/
+│   └── app.py
+├── requirements.txt
+└── README.md
 
 ## To Run Flask App 
 pip install -r requirements.txt
 cd flask_app
 python app.py
 Open browser at http://127.0.0.1:5000
-
+Login infomation
+USERNAME = "admin"
+PASSWORD = "@Sonnaeun1"
 
 Results
 DenseNet121 achieved:
