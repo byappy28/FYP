@@ -41,3 +41,5 @@ Accuracy:75.91%
 AUC: 0.8113
 Balanced recall across benign and malignant cases
 Integrated Grad-CAM visualisation increased interpretability and user trust.
+
+Video Demostration: https://www.dropbox.com/scl/fi/7xwvdgsb9nwm0aso47yrd/FYP-Video-Demo.mp4?rlkey=b5ugcodjdtxq04pco1y67495r&st=wwo9h3t6&dl=0
