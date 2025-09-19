@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Breast Cancer Detection</title>
+     <!-- Link to external CSS for login page styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <!-- Overlay background for aesthetic effect -->
+    <div class="overlay"></div>
+    <!-- Main login box container -->
+    <div class="login-box">
+        <!-- Application logo -->
+        <img src="{{ url_for('static', filename='medical_logo.png') }}" alt="Medical Logo" class="logo">
+         <!-- Application title and subtitle -->
+        <h2 class="app-title">Breast Cancer Detection</h2>
+        <p class="subtitle">Using DenseNet Model with Grad-CAM Visualisation</p>
+        <!-- Display flash messages (e.g., login errors, success messages) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <!-- Login form -->
+        <form method="POST" autocomplete="off">
+              <!-- Username input  -->
+            <input type="text" name="username" placeholder="Username" autocomplete="off" required><br>
+            <!-- Password input with toggle visibility icon -->
+            <div class="password-wrapper">
+                <input type="password" name="password" placeholder="Password" id="password" autocomplete="new-password" required>
+                <span class="toggle-password" onclick="togglePassword()">👁</span>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+            <!-- Forgot password link (custom message to maintain security policy) -->
+            <p class="forgot-password">
+                <a href="#" onclick="alert('For password assistance, please contact the Medical Records Department or your System Administrator. Due to the sensitive nature of medical systems, password resets must be handled in person.'); return false;">
+                    Forgot Password?
+                </a>
+            </p>
+    </div>
+
+    <footer>
+        &copy; 2025 Brandon Yap. All rights reserved.
+    </footer>
+     <!-- Toggle password visibility -->
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            passwordField.type = passwordField.type === "password" ? "text" : "password";
+        }
+    </script>
+</body>
+</html>

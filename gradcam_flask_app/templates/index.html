@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <title>Breast Cancer Detection - Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> <!-- Link to external CSS for page styling -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const uploadArea = document.getElementById('upload-area'); // Drag & drop/upload area
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('preview-img');
+        const predictBtn = document.getElementById('predict-btn'); // Submit button
+        const overlay = document.getElementById('loading-overlay'); // Loading animation overlay
+
+        // Hide overlay at start 
+        overlay.style.display = "none";
+         // Clicking the upload area triggers hidden file input
+        uploadArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+        
+        async function handleFileSelect(event) { // Get selected file
+            const file = event.target.files[0];
+            // If no file is selected, hide preview and disable predict button
+            if (!file) {
+                preview.style.display = 'none';
+                predictBtn.disabled = true;
+                return;
+            }
+            // Prepare form data for preview
+            const formData = new FormData();
+            formData.append('file', file);
+            // Send file to /preview endpoint for quick preview rendering
+            try {
+                const response = await fetch('/preview', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) throw new Error('Preview upload failed');
+
+                const data = await response.json();
+                // Display preview image if available
+                if (data.preview) {
+                    preview.src = data.preview;
+                    preview.style.display = 'block';
+                    predictBtn.disabled = false;
+                } else {
+                    preview.style.display = 'none';
+                    predictBtn.disabled = true;
+                }
+            } catch (error) {// Fallback in case of errors
+                console.error(error);
+                preview.style.display = 'none';
+                predictBtn.disabled = true;
+            }
+        }
+
+        function showOverlayAndSubmit(event) {
+            event.preventDefault();
+            overlay.style.display = 'flex'; // Show overlay only on submit
+            setTimeout(() => {
+                event.target.submit();
+            }, 100);
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.files = e.dataTransfer.files; // Assign dropped files to input
+            fileInput.dispatchEvent(new Event('change')); // Trigger file change event
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.dataTransfer.dropEffect = 'copy'; // Indicate copy action
+        }
+        
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadArea.addEventListener('drop', handleDrop);
+        uploadArea.addEventListener('dragover', handleDragOver);
+        // Only trigger overlay on submit
+        document.querySelector('form').addEventListener('submit', showOverlayAndSubmit); 
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Breast Cancer Detection</h1>
+        <p class="subtitle">
+            Upload a mammogram image  DICOM (.dcm) or a (PNG/JPG)file and click Predict to detect potential cancerous regions.
+            Grad-CAM visualization will highlight areas of concern.
+        </p>
+         <!-- Upload form -->
+        <form action="/" method="post" enctype="multipart/form-data">
+             <!-- Upload area: supports click + drag & drop -->
+            <div class="upload-area" id="upload-area"   
+                 ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                <p>Drag & Drop an DICOM or image file here, or click to select</p>
+                <input type="file" id="file-input" name="file" accept=".dcm,image/*" required>
+                <img id="preview-img" style="display:none;" alt="Image Preview">
+            </div>
+            <button type="submit" id="predict-btn" disabled>Predict and Generate Grad-CAM</button>
+        </form>
+    </div>
+    <!-- Fullscreen loading overlay -->
+    <div id="loading-overlay">
+        <div class="spinner-circle"></div>
+        <p>Analyzing image…</p>
+    </div>
+     <!-- Footer -->
+    <footer>
+        &copy; 2025 Brandon Yap. All rights reserved.
+    </footer>
+</body>
+</html>

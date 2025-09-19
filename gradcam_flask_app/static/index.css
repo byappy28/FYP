@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7fafc; /* Light grayish-blue background */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px; /* Restrict width for better readability */
+    margin: 50px auto; /* Center horizontally with top/bottom spacing */
+    padding: 25px;
+    background-color: white;
+    border-radius: 12px;  /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #2b6cb0; /* Medical blue */
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #4a5568; /* Grayish text */
+    margin-bottom: 20px;
+}
+
+.upload-area {
+    border: 2px dashed #2b6cb0;  /* Dashed blue border */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    cursor: pointer; /* Pointer cursor for interactivity */
+    background-color: #ebf8ff;
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.upload-area:hover {
+    background-color: #bee3f8; /* Slightly darker blue on hover */
+}
+
+.upload-area p {
+    margin: 0;
+    color: #2b6cb0;
+}
+
+#file-input {
+    display: none; /* Hide file input  */
+}
+
+#preview-img {
+    display: block;
+    margin: 15px auto 0; /* top auto bottom */
+    max-width: 100%; /* Prevent overflow */
+    max-height: 300px;
+    border-radius: 8px; /* Rounded image corners */
+    border: 1px solid #cbd5e0;
+}
+
+button {
+    background-color: #38a169; /* Green button (action color) */
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed; /* Show no-interaction cursor */
+}
+
+button:hover:enabled {
+    background-color: #2f855a; /* Darker green on hover */
+}
+
+.spinner {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.spinner-circle {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #bee3f8;
+    border-top: 4px solid #2b6cb0; /* Blue accent for spinning effect */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+/* Animation for spinning loader */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* Fullscreen overlay - hidden by default */
+#loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 9999; /* Always on top */
+    flex-direction: column; /* Stack loader and text vertically */
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-circle {
+    border: 8px solid #f3f3f3; /* Light gray border */
+    border-top: 8px solid #3498db; /* Blue accent */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-overlay p {
+    font-size: 1.2rem;
+    color: #333; /* Dark gray text */
+}
+footer {
+    position: absolute; /* Sticks to bottom */
+    bottom: 10px;
+    font-size: 12px;
+    color: #7f8c8d;  /* Soft gray */
+    width: 100%;
+    text-align: center;
+}
